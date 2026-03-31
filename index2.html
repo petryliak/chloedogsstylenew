@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Каталог</title>
+</head>
+<body>
+        <div class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="index.html">Головна сторінка</a></li>
+        <li><a href="index.html#why">Чому ми?</a></li>
+        <li><a href="index.html#feed">Відгуки</a></li>
+        <li><a href="index.html#contact">Контакти</a></li>
+    </ul>
+</div>
+
+    <div class="bg-shape"></div>
+
+<header>
+    <div class="logo">
+        <a href="Index.html">
+        <img src="лого.PNG" alt="Логотип" class="logo-img">
+        </a>
+  
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Головна сторінка</a></li>
+            <li><a href="index.html#why">Чому ми?</a></li>
+            <li><a href="index.html#feed">Відгуки</a></li>
+            <li><a href="index.html#contact">Контакти</a></li>
+        </ul>
+    </nav>
+
+<div class="icons">
+
+
+        <div class="cart-wrapper" onclick="toggleCart()">
+            <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+
+        <svg class="burger-icon" viewBox="0 0 24 24" onclick="toggleMobileMenu()">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </div>
+</header>
+
+   <div class="container">
+    
+    <div id="catalog-view">
+        <h2 class="section-title">Наші товари</h2>
+        <div class="products-grid" id="products-grid"></div>
+    </div>
+
+    <div id="detail-view" style="display: none;">
+        <button class="back-btn" onclick="showCatalog()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Назад до каталогу
+        </button>
+        
+        <div class="product-detail-layout">
+            <div class="slider-container">
+                <div class="slider" id="product-slider" onscroll="updateDots()"></div>
+                
+                <button class="slider-arrow prev-arrow" onclick="slidePrev()">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="slider-arrow next-arrow" onclick="slideNext()">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+
+                <div class="slider-dots" id="slider-dots"></div>
+            </div>
+
+            <div class="product-info">
+                <h1 class="detail-title" id="detail-title">Назва товару</h1>
+                <p class="detail-price" id="detail-price">0.00 грн</p>
+
+                <div class="size-section">
+                    <p class="size-title">Розмір:</p>
+                    <div class="sizes" id="size-container">
+                        <button class="size-btn" onclick="selectSize(this)">XS</button>
+                        <button class="size-btn" onclick="selectSize(this)">S</button>
+                        <button class="size-btn" onclick="selectSize(this)">M</button>
+                        <button class="size-btn" onclick="selectSize(this)">L</button>
+                        <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        <button class="size-btn" onclick="selectSize(this)">XXL</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">Додати в кошик</button>
+
+                <div class="description-section">
+                    <p class="description-title">Опис товару</p>
+                    <div class="description-content" id="detail-desc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkout-view" style="display: none;">
+        <button class="back-btn" onclick="showCatalog()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Повернутися до каталогу
+        </button>
+        
+        <div class="checkout-layout">
+            <div class="checkout-form">
+    <h2>Оформлення замовлення</h2>
+    <div class="form-row">
+        <input type="text" id="order-name" placeholder="Ім'я" class="chk-input">
+        <input type="text" id="order-surname" placeholder="Прізвище" class="chk-input">
+    </div>
+    <div class="form-row">
+        <input type="text" id="order-patronymic" placeholder="По батькові" class="chk-input">
+        <input type="tel" id="order-phone" placeholder="+380" class="chk-input">
+    </div>
+    <div class="form-row">
+        <select id="order-contact-method" class="chk-input">
+            <option>Telegram</option>
+            <option>Viber</option>
+            <option>Instagram</option>
+            <option>Дзвінок</option>
+        </select>
+        <input type="text" id="order-contact-details" placeholder="Введіть свій @nickname або номер" class="chk-input">
+    </div>
+    <p class="warning-text">Будь ласка, уважно заповнюйте контактні дані...</p>
+    <textarea id="order-comment" placeholder="Коментар до замовлення (необов'язково)" class="chk-input chk-textarea"></textarea>
+
+    <h2>Доставка</h2>
+    <div class="form-row">
+        <input type="text" id="order-city" placeholder="Місто" class="chk-input">
+        <input type="text" id="order-post-office" placeholder="Відділення Нової Пошти" class="chk-input">
+    </div>
+
+    <h2>Спосіб оплати</h2>
+    <div class="payment-methods">
+        <label class="radio-label"><input type="radio" name="payment" value="Передоплата"> Передоплата</label>
+        <label class="radio-label"><input type="radio" name="payment" value="Оплата при отриманні" checked> Оплата при отриманні</label>
+    </div>
+</div>
+
+            <div class="checkout-summary">
+                <h3 id="checkout-summary-title">Ваші покупки</h3>
+                <div id="checkout-items-container"></div>
+                
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Нова Пошта</span>
+                        <span>Згідно з тарифами перевізника</span>
+                    </div>
+                    <div class="total-row total-final">
+                        <span>Разом</span>
+                        <span id="checkout-total-price">0 грн</span>
+                    </div>
+                </div>
+
+                <div class="summary-agreements">
+                    <label class="check-label">
+                        <input type="checkbox"> Я погоджуюсь з <a href="#">Політикою конфіденційності</a>
+                    </label>
+                    <label class="check-label">
+<input type="checkbox" id="order-no-call" checked> Я не потребую дзвінка менеджера                    </label>
+                </div>
+<button type="button" class="checkout-submit-btn" onclick="submitOrder()">Оформити замовлення</button>            </div>
+        </div>
+    </div>
+
+</div>
+        
+       
+<script>
+   function submitOrder() {
+    const botToken = "8762040854:AAETImxvNo_iL4Ii9o4-XviTav3L4Eq4hfQ"; 
+    const chatId = '932627869';
+
+    const name = document.getElementById('order-name').value;
+    const surname = document.getElementById('order-surname').value;
+    const patronymic = document.getElementById('order-patronymic').value;
+    const phone = document.getElementById('order-phone').value;
+    const contactMethod = document.getElementById('order-contact-method').value;
+    const contactDetails = document.getElementById('order-contact-details').value;
+    const comment = document.getElementById('order-comment').value;
+    
+    const city = document.getElementById('order-city').value;
+    const postOffice = document.getElementById('order-post-office').value;
+    
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+    const noCall = document.getElementById('order-no-call').checked ? "❌ Ні (не дзвонити)" : "✅ Так";
+    const totalPrice = document.getElementById('checkout-total-price').innerText;
+
+    if (!name || !phone || !city) {
+        alert("Будь ласка, заповніть обов'язкові поля (Ім'я, Телефон, Місто)!");
+        return;
+    }
+
+    let itemsList = "";
+    if (cartItems.length > 0) {
+        cartItems.forEach((item, index) => {
+            itemsList += `${index + 1}. ${item.title} (Розмір: ${item.size}) - ${item.qty} шт. x ${item.price}\n`;
+        });
+    } else {
+        itemsList = "Кошик порожній (помилка)";
+    }
+
+    const text = `
+🛒 <b>НОВЕ ЗАМОВЛЕННЯ!</b>
+
+👤 <b>Клієнт:</b> ${surname} ${name} ${patronymic}
+📞 <b>Телефон:</b> ${phone}
+💬 <b>Зв'язок:</b> ${contactMethod} (${contactDetails})
+🛑 <b>Потрібен дзвінок:</b> ${noCall}
+
+📦 <b>ТОВАРИ:</b>
+${itemsList}
+📍 <b>Доставка (Нова Пошта):</b>
+Місто: ${city}
+Відділення: ${postOffice}
+
+💳 <b>Оплата:</b> ${paymentMethod}
+💰 <b>Сума до оплати:</b> ${totalPrice}
+
+📝 <b>Коментар:</b>
+${comment ? comment : "Немає коментаря"}
+    `;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'HTML'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            // Якщо повідомлення в ТГ відправлено успішно:
+            alert("Дякуємо! Ваше замовлення успішно оформлено. З вами зв'яжеться менеджер.");
+            
+            cartItems = []; 
+            updateCartUI();
+            showCatalog(); 
+            
+            document.querySelectorAll('.chk-input').forEach(input => input.value = '');
+        } else {
+            alert("Сталася помилка при відправці. Спробуйте пізніше.");
+            console.error(data);
+        }
+    })
+    .catch(error => {
+        alert("Помилка з'єднання! Перевірте інтернет.");
+        console.error('Error:', error);
+    });
+}
+</script>
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+    }
+
+    document.addEventListener('click', (event) => {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const burgerIcon = document.querySelector('.burger-icon');
+        
+        if (!mobileMenu.contains(event.target) && !burgerIcon.contains(event.target)) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+</script>
+<script>
+    const products = [
+        {
+            id: 1,
+            title: "Светр для собак MIU MIU",
+            price: "400.00 грн",
+            badge: "Top",
+            images: [
+                "товар1/1.JPG",
+                "товар1/2.JPG",
+                "товар1/3.JPG"
+            ],
+description: "Подаруйте своєму улюбленцю не лише тепло, але й бездоганний стиль! Дизайнерський светр <b>MIU MIU</b> — це розкішний елемент гардероба для наймодніших хвостиків.<br><br><b>Чому він особливий?</b><br>• <b>Преміальний комфорт:</b> м'яка пряжа, яка не електризує шерсть.<br>• <b>Ідеальна посадка:</b> анатомічний крій не сковує рухів під час активних ігор.<br>• <b>Трендовий дизайн:</b> гарантовано збере компліменти всіх перехожих!<br><br>Чудово підійде як самостійний одяг на прохолодну погоду або як теплий шар під дощовик. Ваш песик заслуговує на найкраще!"        },
+        {
+            id: 2,
+            title: "Брендовий светр для собак",
+            price: "450.00 грн",
+            badge: null,
+            images: [
+                "товар2/1.JPG",
+                "товар2/2.JPG"
+            ],
+description: "Шукаєте ідеальний баланс між модою та теплом? Цей стильний брендовий светр створений для того, щоб ваш хвостик почувався затишно і виглядав на всі 100% під час кожної прогулянки.<br><br><b>Чому варто обрати цю модель?</b><br>• <b>Бездоганна якість:</b> приємний до тіла матеріал, що чудово зігріває та не втрачає форму.<br>• <b>Абсолютний комфорт:</b> легко одягається завдяки м'якій горловині та еластичним краям.<br>• <b>Свобода рухів:</b> анатомічний крій не заважає активним іграм та бігу.<br><br>Базова та водночас розкішна річ, яка стане улюбленою у гардеробі вашого улюбленця. Нехай кожна прогулянка буде теплою та стильною!"        },
+        {
+            id: 3,
+            title: "Худі для собак Essentials",
+            price: "550.00 грн",
+            badge: "Top",
+            images: [
+                "товар3/1.JPG",
+                "товар3/2.PNG"
+            ],
+description: "Streetwear-стиль тепер доступний і для вашого хвостика! Культове худі <b>Essentials</b> — це ідеальне поєднання мінімалізму, преміального комфорту та вуличного стилю.<br><br><b>Чому воно особливе?</b><br>• <b>Преміальний матеріал:</b> дихаюча бавовна з м'яким утепленням всередині, що чудово зігріває.<br>• <b>Продумані деталі:</b> стильний капюшон та спеціальний отвір на спинці для кріплення повідка.<br>• <b>Ідеальна фіксація:</b> еластичні манжети забезпечують щільну посадку, захищають від вітру та не сковують рухів.<br><br>Базова річ, яка повинна бути в гардеробі кожного сучасного песика. Максимум стилю, максимум комфорту!"   },
+        {
+            id: 4,
+            title: "Накидка/Кадиган для собак Dior ",
+            price: "650.00 грн",
+            badge: null,
+            images: [
+                "товар4/2.JPG",
+                "товар4/1.JPG",
+                "товар4/3.JPG",
+
+            ],
+description: "Додайте нотку паризького шику до гардероба вашого улюбленця! Елегантна накидка-кардиган у стилі <b>Dior</b> — це втілення розкоші, витонченості та абсолютного комфорту.<br><br><b>Чому ця модель унікальна?</b><br>• <b>Ексклюзивний дизайн:</b> впізнаваний фірмовий принт, який миттєво привертає увагу.<br>• <b>Максимальна зручність:</b> формат накидки ідеально підходить для песиків, які не люблять одяг з рукавами. Одягається за лічені секунди!<br>• <b>Преміальна м'якість:</b> ніжний матеріал чудово зігріває та не електризує шерсть.<br>• <b>Свобода рухів:</b> вільний крій не обмежує активність під час ігор.<br><br>Справжня висока мода для вашого чотирилапого друга. Зробіть його зіркою кожної прогулянки!"        },
+
+        {
+            id: 5,
+            title: "Светр для собак Louis Vuitton ",
+            price: "650.00 грн",
+            badge: null,
+            images: [
+                "товар5/1.JPG",
+                "товар5/2.PNG"
+            ],
+description: "Ексклюзивний стиль та безкомпромісний комфорт! Розкішний светр з класичним принтом <b>Louis Vuitton</b> перетворить вашого улюбленця на справжню ікону стилю.<br><br><b>Чому він особливий?</b><br>• <b>Легендарний дизайн:</b> впізнаваний у всьому світі принт, який привертає увагу.<br>• <b>Тепло та затишок:</b> м'яка, приємна до тіла в'язка надійно захистить хвостика від холоду.<br>• <b>Ідеальна посадка:</b> еластичний матеріал легко тягнеться, зручно одягається та не сковує рухів.<br>• <b>Практичність:</b> відмінно тримає форму та довго зберігає свій преміальний вигляд.<br><br>Ваша собака заслуговує виглядати не менш стильно, ніж ви. Готуйтеся збирати захоплені погляди на кожній прогулянці!"        },
+
+                {
+            id: 6,
+            title: "Брендові светри для собак  ",
+            price: "650.00 грн",
+            badge: null,
+            images: [
+                "товар6/5.JPG",
+                "товар6/2.JPG",
+                "товар6/3.JPG",
+                "товар6/4.JPG",
+                "товар6/1.JPG",
+            ],
+description: "Підкресліть індивідуальність вашого улюбленця! Колекція <b>брендових светрів</b> — це ідеальне поєднання світових трендів, бездоганної якості та неймовірного затишку.<br><br><b>Чому варто обрати саме їх?</b><br>• <b>Трендові дизайни:</b> стильні принти, натхненні відомими будинками моди.<br>• <b>Максимальний комфорт:</b> м'яка, гіпоалергенна в'язка, яка зігріває та не кошлатить шерсть.<br>• <b>Зручна посадка:</b> еластичний крій ідеально адаптується до фігури та не сковує рухів.<br>• <b>Довговічність:</b> матеріали відмінно переносять прання та не втрачають форму.<br><br>Перетворіть звичайну прогулянку на справжній модний показ. Обирайте свій ідеальний дизайн!"        },
+
+        {
+            id: 7,
+            title: "Жилетка для собак Louis Vuitton ",
+            price: "550.00 грн",
+            badge: null,
+            images: [
+                "товар7/1.JPG",
+                "товар7/2.JPG",
+                "товар7/3.JPG",
+                "товар7/4.JPG",
+                "товар7/5.JPG",
+            ],
+description: "Ексклюзивна жилетка в стилі <b>Louis Vuitton</b> — це абсолютний маст-хев для прохолодної погоди! Вона поєднує розкішний фірмовий дизайн та неймовірний комфорт.<br><br><b>Чому ця жилетка — топ-вибір?</b><br>• <b>Легендарний принт:</b> впізнаваний паттерн, який підкреслює статус та смак.<br>• <b>Абсолютна свобода:</b> ідеально для песиків, які не люблять рукави. Лапки залишаються повністю вільними!<br>• <b>Надійний захист:</b> матеріал чудово захищає від вітру і зберігає тепло грудки та спинки.<br>• <b>Зручність у деталях:</b> продумана застібка дозволяє одягнути песика за лічені секунди.<br><br>Подаруйте своєму улюбленцю тепло, яке не обмежує рухів. Ваш песик буде головною зіркою парку!"        },
+
+                        {
+            id: 8,
+            title: "Халат для собак",
+            price: "250.00 грн",
+            badge: null,
+            images: [
+                "товар8/1.JPG",
+                "товар8/2.JPG",
+                "товар8/3.JPG",
+                "товар8/4.JPG",
+                
+            ],
+description: "Справжній SPA-відпочинок для вашого хвостика! Цей неймовірно м'який та затишний <b>халат</b> перетворить купання на улюблену процедуру. Ідеальне рішення після ванни або прогулянки під дощем.<br><br><b>Чому цей халат — просто знахідка?</b><br>• <b>Супер-поглинання:</b> тканина швидко вбирає вологу, допомагаючи шерсті висохнути без стресового фена.<br>• <b>Чистота в домі:</b> забудьте про мокрі плями на меблях, коли песик обтрушується після води!<br>• <b>Тепло та затишок:</b> надійно захищає улюбленця від протягів та переохолодження.<br>• <b>Продуманий крій:</b> легко одягається, фіксується зручним пояском та не сковує рухів.<br><br>Зробіть рутину догляду комфортною. У цьому халаті ваш песик буде виглядати просто неймовірно мило!"        },
+
+        {
+            id: 9,
+            title: "Жилетка для собак",
+            price: "650.00 грн",
+            badge: null,
+            images: [
+                "товар9/1.JPG",
+                "товар9/2.JPG",
+                
+            ],
+description: "Шукаєте ідеальний одяг для міжсезоння? Ця стильна та практична <b>жилетка</b> — справжній порятунок для активних хвостиків, які не люблять сковуючий одяг.<br><br><b>Чому це безпрограшний варіант?</b><br>• <b>Абсолютна свобода:</b> відсутність рукавів гарантує, що ваш улюбленець зможе бігати та гратися без обмежень.<br>• <b>Тепло там, де треба:</b> надійно закриває грудку та спинку, захищаючи від пронизливого вітру.<br>• <b>Швидке одягання:</b> зручна застібка дозволяє зібратися на вулицю за лічені секунди — жодних капризів!<br>• <b>Стильний мінімалізм:</b> лаконічний дизайн, який легко поєднується зі шлейкою чи нашийником.<br><br>Подаруйте своєму песику тепло та свободу рухів. З цією жилеткою кожна прогулянка буде в радість!"        },
+
+        {
+            id: 10,
+            title: "Шуба для собак Louis Vuitton",
+            price: "650.00 грн",
+            badge: null,
+            images: [
+                "товар10/1.JPG",
+                "товар10/2.JPG",
+                
+                
+            ],
+description: "Справжній важкий люкс для вашого хвостика! Розкішна шубка в стилі <b>Louis Vuitton</b> створена для того, щоб підкорювати зимові вулиці та збирати захоплені погляди.<br><br><b>Чому ця шубка — справжній хіт?</b><br>• <b>Ексклюзивний дизайн:</b> багате екохутро та впізнаваний стиль, який одразу підкреслює статус.<br>• <b>Абсолютне тепло:</b> густий матеріал надійно зігріває навіть у найсильніші морози.<br>• <b>Турбота про шерсть:</b> гладка підкладка не електризує та не збиває шерсть у ковтунці.<br>• <b>Комфортна посадка:</b> шубка дуже легка, не тисне і дозволяє песику комфортно рухатися.<br><br>Подаруйте своєму улюбленцю королівський затишок. З цією шубкою зима буде модною та теплою!"        },
+
+        {
+            id: 11,
+            title: "Сорочка для собак Dior",
+            price: "400.00 грн",
+            badge: null,
+            images: [
+                "товар11/1.JPG",
+                "товар11/2.PNG",
+                "товар11/3.JPG",
+                
+                
+            ],
+description: "Справжня елегантність у кожній деталі! Легка та стильна сорочка в стилі <b>Dior</b> — це бездоганний вибір для чотирилапих модників.<br><br><b>У чому її переваги?</b><br>• <b>Висока мода:</b> культовий принт, який миттєво перетворює песика на зірку прогулянки.<br>• <b>Легкість:</b> тонкий матеріал чудово пропускає повітря — ідеально для теплих днів.<br>• <b>Класичний крій:</b> стильний комірець та зручні застібки забезпечують охайний вигляд.<br>• <b>Комфорт:</b> продумана форма не обмежує рухи під час прогулянок.<br><br>Дозвольте вашому улюбленцю відчути себе частиною світу моди. Це не просто одяг, це заява про стиль!"        },
+
+                        {
+            id: 12,
+            title: "Шуба для собак TNF x Gucci",
+            price: "750.00 грн",
+            badge: null,
+            images: [
+                "товар12/1.PNG",
+                "товар12/2.JPG",
+                "товар12/3.JPG",
+                
+                
+            ],
+description: "Головний хіт сезону в гардеробі вашого хвостика! Колаборація <b>TNF x Gucci</b> — це ідеальний мікс фірмового стилю та неймовірної практичності.<br><br><b>Чому це маст-хев?</b><br>• <b>Хайповий дизайн:</b> впізнаване поєднання логотипів, що робить песика зіркою стрітстайлу.<br>• <b>Максимальне тепло:</b> високотехнологічні матеріали надійно захищають від морозу та переохолодження.<br>• <b>Стійкість до негоди:</b> густе екохутро чудово протистоїть вітру та вологому снігу.<br>• <b>Комфорт у русі:</b> легка конструкція не обтяжує собаку та не заважає активним іграм.<br><br>Зберіть усі лайки на прогулянці! Ця шубка — маніфест стилю вашого чотирилапого друга."        },
+
+
+
+
+
+        
+    ];
+
+    
+    function renderCatalog() {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = '';
+
+        products.forEach(product => {
+            const badgeHtml = product.badge ? `<div class="badge-top">${product.badge}</div>` : '';
+            
+            const cardHtml = `
+                <div class="product-card" onclick="showDetail(${product.id})">
+                    <div class="product-image-wrapper">
+                        ${badgeHtml}
+                        <img src="${product.images[0]}" alt="${product.title}">
+                    </div>
+                    <div class="product-title">${product.title}</div>
+                    <div class="product-price">${product.price}</div>
+                </div>
+            `;
+            grid.innerHTML += cardHtml;
+        });
+    }
+function showDetail(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        window.currentProduct = product;
+
+        document.getElementById('detail-title').innerText = product.title;
+        document.getElementById('detail-price').innerText = product.price;
+        document.getElementById('detail-desc').innerHTML = `<b>${product.title}</b><br><br>${product.description}`;
+        
+        const slider = document.getElementById('product-slider');
+        const dotsContainer = document.getElementById('slider-dots');
+        slider.innerHTML = '';
+        dotsContainer.innerHTML = '';
+
+        product.images.forEach((img, index) => {
+            slider.innerHTML += `<img src="${img}" alt="Фото ${index + 1}" style="pointer-events: none;">`;
+            const activeClass = index === 0 ? 'active' : '';
+            dotsContainer.innerHTML += `<div class="dot ${activeClass}"></div>`;
+        });
+
+        setTimeout(() => { slider.scrollLeft = 0; }, 10);
+
+        document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById('catalog-view').style.display = 'none';
+        document.getElementById('checkout-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'block';
+        
+        window.scrollTo(0, 0);
+    }
+function showCatalog() {
+        document.getElementById('detail-view').style.display = 'none';
+        document.getElementById('checkout-view').style.display = 'none'; // ДОДАНО
+        document.getElementById('catalog-view').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function selectSize(btn) {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function updateDots() {
+        const slider = document.getElementById('product-slider');
+        const dots = document.querySelectorAll('.dot');
+        
+        const scrollPosition = slider.scrollLeft;
+        const imageWidth = slider.clientWidth;
+        const activeIndex = Math.round(scrollPosition / imageWidth);
+
+        dots.forEach((dot, index) => {
+            if (index === activeIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    let cartItems = [];
+
+    function toggleCart() {
+        document.getElementById('cart-sidebar').classList.toggle('active');
+        document.getElementById('cart-overlay').classList.toggle('active');
+    }
+
+    function addToCart() {
+        const activeSize = document.querySelector('.size-btn.active');
+        if (!activeSize) {
+            alert('Будь ласка, оберіть розмір перед тим, як додати товар у кошик!');
+            return;
+        }
+
+        const sizeText = activeSize.innerText;
+        
+        const existingItem = cartItems.find(item => item.id === window.currentProduct.id && item.size === sizeText);
+        
+        if (existingItem) {
+            existingItem.qty++;
+        } else {
+            cartItems.push({
+                id: window.currentProduct.id,
+                title: window.currentProduct.title,
+                price: window.currentProduct.price,
+                image: window.currentProduct.images[0],
+                size: sizeText,
+                qty: 1
+            });
+        }
+
+        updateCartUI();
+        toggleCart(); 
+    }
+
+    function updateCartUI() {
+        const badge = document.getElementById('cart-badge');
+        const container = document.getElementById('cart-items-container');
+        
+        const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+        badge.innerText = totalQty;
+        if (totalQty > 0) { badge.classList.add('show'); } 
+        else { badge.classList.remove('show'); }
+
+        container.innerHTML = '';
+        if (cartItems.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#888; margin-top:50px;">Кошик порожній</p>';
+            return;
+        }
+
+        cartItems.forEach((item, index) => {
+            container.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="Фото товару" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-meta">Розмір: <b>${item.size}</b></div>
+                        <div class="cart-item-price">${item.price}</div>
+                        
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                            <span class="qty-number">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})">Видалити товар</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function changeQty(index, delta) {
+        cartItems[index].qty += delta;
+        if (cartItems[index].qty <= 0) {
+            cartItems.splice(index, 1);
+        }
+        updateCartUI();
+    }
+
+    function removeItem(index) {
+        cartItems.splice(index, 1);
+        updateCartUI();
+    }
+    renderCatalog();
+</script>
+
+<script>
+function slideNext() {
+    const slider = document.getElementById('product-slider');
+    slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+}
+
+function slidePrev() {
+    const slider = document.getElementById('product-slider');
+    slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+}
+
+</script>  
+<script>  
+    function goToCheckout() {
+        if (cartItems.length === 0) {
+            alert("Ваш кошик порожній!");
+            return;
+        }
+        toggleCart(); 
+        
+        document.getElementById('catalog-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'none';
+        document.getElementById('checkout-view').style.display = 'block';
+        window.scrollTo(0, 0);
+        
+        renderCheckoutItems();
+    }
+
+    function renderCheckoutItems() {
+        const container = document.getElementById('checkout-items-container');
+        const title = document.getElementById('checkout-summary-title');
+        const totalEl = document.getElementById('checkout-total-price');
+
+        let totalQty = 0;
+        let totalPrice = 0;
+        container.innerHTML = '';
+
+        cartItems.forEach(item => {
+            totalQty += item.qty;
+            
+            let numPrice = parseFloat(item.price.replace(/[^\d.]/g, ''));
+            if (!isNaN(numPrice)) {
+                totalPrice += numPrice * item.qty;
+            }
+
+            container.innerHTML += `
+                <div class="chk-item">
+                    <img src="${item.image}" alt="" class="chk-item-img">
+                    <div class="chk-item-info">
+                        <div class="chk-item-title">${item.title}</div>
+                        <div class="chk-item-meta">Розмір: ${item.size}</div>
+                        <div class="chk-item-meta">Кількість: ${item.qty}</div>
+                        <div class="chk-item-price">${item.price}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+        title.innerText = `Ваші покупки (${totalQty})`;
+        
+        if (totalPrice > 0) {
+            totalEl.innerText = `${totalPrice.toFixed(2)} грн`;
+        } else {
+            totalEl.innerText = `Уточнюється`;
+        }
+    }
+
+
+</script>
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+<div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+        <h3>Ваші покупки</h3>
+        <button class="close-cart-btn" onclick="toggleCart()">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+        </div>
+ <div class="cart-footer">
+        <button class="checkout-btn" onclick="goToCheckout()">Оформити замовлення</button>
+    </div>
+</div>
+</body>
+</html>
