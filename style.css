@@ -1490,19 +1490,22 @@ h1 {
 
 
 .clothing-showcase .img-wrapper {
-    overflow: hidden !important; /* Надійно обрізаємо все, що вилазить за межі круга */
+    border-radius: 50% !important; /* Робимо блок круглим */
+    overflow: hidden !important; /* Обрізаємо все, що вилазить за межі круга */
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    border-radius: 50% !important; /* Робимо блок круглим */
-    background-color: #f5f5f5; /* Світлий фон на секунду, поки вантажиться фото */
+    /* Можеш змінити цей розмір (ширину та висоту) під потреби дизайну */
+    width: 250px !important; 
+    height: 250px !important; 
+    background-color: #f5f5f5; /* Світлий фон під фото */
 }
 
 .clothing-showcase .img-wrapper img {
-    width: 100% !important; /* Фото займає всю ширину круга */
-    height: 100% !important; /* Фото займає всю висоту круга */
-    object-fit: cover !important; /* ГОЛОВНА МАГІЯ: фото пропорційно збільшується, щоб заповнити весь круг без білих дір і сплющень */
-    object-position: center !important; /* Центруємо фото, щоб мордочка собаки не з'їхала вбік */
+    width: 100% !important; /* Зображення займає всю ширину круга */
+    height: 100% !important; /* Зображення займає всю висоту круга */
+    object-fit: cover !important; /* ГОЛОВНА МАГІЯ: заповнює круг без спотворень */
+    object-position: center !important; /* Центруємо фото */
 }
 
 
