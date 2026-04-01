@@ -1458,7 +1458,7 @@ h1 {
     }
 
     #extraProducts .product-card {
-        width: calc(45% - 15px) !important; /* Робимо так, щоб влазило рівно 2 картки */
+        width: calc(45% - 15px) !important; 
         max-width: 280px !important; 
         margin: 0 !important; 
     }
@@ -1472,21 +1472,36 @@ h1 {
     }
 }
 
-/* --- ТІЛЬКИ ДЛЯ ТЕЛЕФОНІВ (до 768px) --- */
 @media (max-width: 768px) {
     #extraProducts.show {
         display: flex !important; 
-        flex-direction: column !important; /* На телефоні ставимо їх строго в колонку */
+        flex-direction: column !important;
         align-items: center !important;
         gap: 20px !important;
         width: 100% !important;
     }
     
     #extraProducts .product-card {
-        width: 100% !important; /* На телефоні картка займає всю доступну ширину */
-        max-width: 320px !important; /* Але не стає надто величезною */
-        margin: 0 auto !important; /* Центруємо саму картку */
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important; 
     }
+}
+
+.clothing-showcase .img-wrapper {
+    overflow: hidden !important; 
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important; 
+    background-color: #f5f5f5;
+}
+
+.clothing-showcase .img-wrapper img {
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    object-position: center !important; 
 }
 
 
