@@ -1447,3 +1447,46 @@ h1 {
         width: 100% !important;
     }
 
+@media (min-width: 769px) {
+    #extraProducts.show {
+        display: flex !important; 
+        flex-direction: row !important; 
+        flex-wrap: wrap !important; 
+        justify-content: center !important; 
+        gap: 30px !important; 
+        width: 100% !important;
+    }
+
+    #extraProducts .product-card {
+        width: calc(45% - 15px) !important; /* Робимо так, щоб влазило рівно 2 картки */
+        max-width: 280px !important; 
+        margin: 0 !important; 
+    }
+
+    #extraProducts .image-wrapper {
+        height: 220px !important; 
+    }
+    
+    #extraProducts .product-title {
+        font-size: 15px !important; 
+    }
+}
+
+/* --- ТІЛЬКИ ДЛЯ ТЕЛЕФОНІВ (до 768px) --- */
+@media (max-width: 768px) {
+    #extraProducts.show {
+        display: flex !important; 
+        flex-direction: column !important; /* На телефоні ставимо їх строго в колонку */
+        align-items: center !important;
+        gap: 20px !important;
+        width: 100% !important;
+    }
+    
+    #extraProducts .product-card {
+        width: 100% !important; /* На телефоні картка займає всю доступну ширину */
+        max-width: 320px !important; /* Але не стає надто величезною */
+        margin: 0 auto !important; /* Центруємо саму картку */
+    }
+}
+
+
